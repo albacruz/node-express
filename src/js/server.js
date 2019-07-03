@@ -3,17 +3,6 @@ const app = express();
 const router = require("../api/router");
 app.use(express.json());
 
-const usuarios = [
-  { id: 1, name: "Pepe", age: 15 },
-  { id: 2, name: "Juan", age: 15 },
-  { id: 3, name: "Ele", age: 15 },
-  { id: 4, name: "Ale", age: 15 },
-  { id: 5, name: "Aarón", age: 15 },
-  { id: 6, name: "Darío", age: 15 },
-  { id: 7, name: "Migue", age: 15 },
-  { id: 8, name: "Albito", age: 15 }
-];
-
 /* let throwDice = [{ caras: 0, numero: 0 }];
 
 app.get("/users", (req, res) => {
