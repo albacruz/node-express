@@ -9,7 +9,6 @@ router.get("/", (req, res) => {
 router.get("/:id", (req, res) => {
   const userId = req.params.id;
   const user = usuarios.find(user => user.id == userId);
-  /* console.log("Request: ", req.headers); */
   return res.json(user);
 });
 
