@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/albacruz/node-express#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "typescript": "^3.5.2"
   },
   "devDependencies": {
     "nodemon": "^1.19.1"
