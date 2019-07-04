@@ -1,0 +1,74 @@
+[
+  {
+    "id": 0,
+    "title": "Titanic",
+    "director": "James Cameron",
+    "genre": "Drama",
+    "releaseDate": 1994,
+    "rating": 9.7,
+    "likes": 0
+  },
+  {
+    "id": 1,
+    "title": "Toy Story",
+    "director": "Tom Jenkins",
+    "genre": "Animación",
+    "releaseDate": 1997,
+    "rating": 9,
+    "likes": 0
+  },
+  {
+    "id": 2,
+    "title": "Harry Potter",
+    "director": "Aretta Franklin",
+    "genre": "Fantasía",
+    "releaseDate": 1998,
+    "rating": 10,
+    "likes": 0
+  },
+  {
+    "id": 3,
+    "title": "Iron Man",
+    "director": "J Balvin",
+    "genre": "Super-Héroes",
+    "releaseDate": 2007,
+    "rating": 8.5,
+    "likes": 0
+  },
+  {
+    "id": 4,
+    "title": "Pocoyó Returns",
+    "director": "James Cameron",
+    "genre": "Animación",
+    "releaseDate": 2000,
+    "rating": 7,
+    "likes": 0
+  },
+  {
+    "id": 5,
+    "title": "Lo que el viento se llevó",
+    "director": "J Balvin",
+    "genre": "Drama",
+    "releaseDate": 1756,
+    "rating": 4,
+    "likes": 0
+  },
+  {
+    "id": 6,
+    "title": "Spider-Man",
+    "director": "Aretta Franklin",
+    "genre": "Super-Héroes",
+    "releaseDate": 2003,
+    "rating": 7.4,
+    "likes": 0
+  },
+  {
+    "id": 7,
+    "title": "Blancanieves y los 7 enanitos",
+    "director": "Alba",
+    "genre": "Animación",
+    "releaseDate": 1986,
+    "rating": 6.7,
+    "likes": 0
+  }
+]
