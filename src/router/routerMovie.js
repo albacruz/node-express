@@ -17,10 +17,11 @@ router.post("/", (req, res) => {
   const movie = req.body;
   movie.id = maxId;
   movies.push(movie);
-  res.json(movie);
+  //res.json(movie);
+  res.send("Se ha añadido correctamente");
 });
 
-router.get("/deleteMovie/:id", (req, res) => {
+router.delete("/:id", (req, res) => {
   const movieId = req.params.id;
   const movie = movies.find(movie => movie.id == movieId);
   const movieToRemove = movies.indexOf(movie);
@@ -29,7 +30,7 @@ router.get("/deleteMovie/:id", (req, res) => {
   res.send("Se ha eliminado correctamente");
 });
 
-router.get("/like/:id", (req, res) => {
+router.put("/like/:id", (req, res) => {
   const movieId = req.params.id;
   const movie = movies.find(movie => movie.id == movieId);
   movie.likes++;
@@ -37,7 +38,7 @@ router.get("/like/:id", (req, res) => {
   res.json(movie);
 });
 
-router.get("/dislike/:id", (req, res) => {
+router.put("/dislike/:id", (req, res) => {
   const movieId = req.params.id;
   const movie = movies.find(movie => movie.id == movieId);
   if (movie.likes > 0) movie.likes--;

@@ -20,7 +20,7 @@ router.post("/", (req, res) => {
   res.json(user);
 });
 
-router.get("/deleteUser/:id", (req, res) => {
+router.delete("/:id", (req, res) => {
   const userId = req.params.id;
   const user = usuarios.find(user => user.id == userId);
   const userToRemove = usuarios.indexOf(user);
