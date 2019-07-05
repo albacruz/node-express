@@ -25,7 +25,16 @@ deleteUser = (req, res) => {
   res.send("Se ha eliminado correctamente");
 };
 
-updateUser = (req, res) => {};
+updateUser = (req, res) => {
+  const userIdToUpdate = req.params.id;
+  const userToUpdate = req.body;
+  const user = usersDB.find(user => user.id == userIdToUpdate);
+
+  user.name = userToUpdate.name || user.name;
+  user.age = userToUpdate.age || user.age;
+
+  res.json(user);
+};
 
 module.exports = {
   addUser,

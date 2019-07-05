@@ -33,7 +33,19 @@ deleteMovie = (req, res) => {
   res.send("Se ha eliminado correctamente");
 };
 
-updateMovie = (req, res) => {};
+updateMovie = (req, res) => {
+  const movieIdToUpdate = req.params.id;
+  const updatedMovie = req.body;
+  const movie = moviesDB.find(movie => movie.id == movieIdToUpdate);
+
+  movie.title = updatedMovie.title || movie.title;
+  movie.director = updatedMovie.director || movie.director;
+  movie.genre = updatedMovie.genre || movie.genre;
+  movie.releaseDate = updatedMovie.releaseDate || movie.releaseDate;
+  movie.rating = updatedMovie.rating || movie.rating;
+
+  res.json(movie);
+};
 
 like = (req, res) => {
   const movieId = req.params.id;
