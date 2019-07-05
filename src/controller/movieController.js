@@ -35,10 +35,28 @@ deleteMovie = (req, res) => {
 
 updateMovie = (req, res) => {};
 
+like = (req, res) => {
+  const movieId = req.params.id;
+  const movie = moviesDB.find(movie => movie.id == movieId);
+  movie.likes++;
+
+  res.json(movie);
+};
+
+dislike = (req, res) => {
+  const movieId = req.params.id;
+  const movie = moviesDB.find(movie => movie.id == movieId);
+  if (movie.likes > 0) movie.likes--;
+
+  res.json(movie);
+};
+
 module.exports = {
   addMovie,
   showMovie,
   showAll,
   deleteMovie,
-  updateMovie
+  updateMovie,
+  like,
+  dislike
 };

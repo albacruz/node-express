@@ -6,7 +6,8 @@ router.get("/", movie_controller.showAll);
 router.get("/:id", movie_controller.showMovie);
 router.post("/addMovie", movie_controller.addMovie);
 router.delete("/:id", movie_controller.deleteMovie);
-router.put("/:element", movie_controller.updateMovie);
 router.put("/update", movie_controller.updateMovie);
+router.put("/like/:id", movie_controller.like);
+router.put("/dislike/:id", movie_controller.dislike);
 
 module.exports = router;
