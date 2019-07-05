@@ -1,49 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const movies = require("../database/movies");
+const movie_controller = require("../controller/movieController");
 
-router.get("/", (req, res) => {
-  res.json(movies);
-});
-
-router.get("/:id", (req, res) => {
-  const movieId = req.params.id;
-  const movie = movies.find(movie => movie.id == movieId);
-  res.json(movie);
-});
-
-router.post("/", (req, res) => {
-  const maxId = movies.length;
-  const movie = req.body;
-  movie.id = maxId;
-  movies.push(movie);
-  //res.json(movie);
-  res.send("Se ha añadido correctamente");
-});
-
-router.delete("/:id", (req, res) => {
-  const movieId = req.params.id;
-  const movie = movies.find(movie => movie.id == movieId);
-  const movieToRemove = movies.indexOf(movie);
-  movies.splice(movieToRemove, 1);
-
-  res.send("Se ha eliminado correctamente");
-});
-
-router.put("/like/:id", (req, res) => {
-  const movieId = req.params.id;
-  const movie = movies.find(movie => movie.id == movieId);
-  movie.likes++;
-
-  res.json(movie);
-});
-
-router.put("/dislike/:id", (req, res) => {
-  const movieId = req.params.id;
-  const movie = movies.find(movie => movie.id == movieId);
-  if (movie.likes > 0) movie.likes--;
-
-  res.json(movie);
-});
+router.get("/", movie_controller.showAll);
+router.get("/:id", movie_controller.showMovie);
+router.post("/addMovie", movie_controller.addMovie);
+router.delete("/:id", movie_controller.deleteMovie);
+router.put("/update", movie_controller.updateMovie);
+router.put("/like/:id", movie_controller.like);
+router.put("/dislike/:id", movie_controller.dislike);
 
 module.exports = router;
