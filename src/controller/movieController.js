@@ -36,6 +36,7 @@ deleteMovie = (req, res) => {
 updateMovie = (req, res) => {
   const movieIdToUpdate = req.params.id;
   const updatedMovie = req.body;
+  c;
   const movie = moviesDB.find(movie => movie.id == movieIdToUpdate);
 
   movie.title = updatedMovie.title || movie.title;
