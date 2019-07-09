@@ -1,39 +1,35 @@
-const userModel = require("../models/User");
-const usersDB = require("../database/usuarios");
+const users = require("../models/User");
 
-showAll = (req, res) => {
-  res.json(usersDB);
+async function showAll(req, res) {
+  const usu = await users.find();
+  res.json(usu); 
 };
 
-showUser = (req, res) => {
-  const userId = req.params.id;
-  const user = usersDB.find(user => user.id == userId);
+async function showUser (req, res){
+  const userName = req.params.name;
+  const user = await users.findOne({name: userName});
   res.json(user);
 };
 
-addUser = (req, res) => {
-  const user = new userModel(usersDB.length + 1, req.body.name, req.body.age);
-  usersDB.push(user);
-  res.send("Se ha añadido correctamente");
+async function addUser(req, res) {
+  const userToCreate = new users(req.body);
+  await userToCreate.save();
+  const usus = await users.find();
+  res.json(usus);
 };
 
-deleteUser = (req, res) => {
-  const userId = req.params.id;
-  const user = usersDB.find(user => user.id == userId);
-  const userToRemove = usersDB.indexOf(user);
-  usersDB.splice(userToRemove, 1);
-  res.send("Se ha eliminado correctamente");
+async function deleteUser (req, res){
+  const userName = req.params.name;
+  await users.findOneAndDelete({name: userName});
+  const usus = await users.find();
+  res.json(usus);
 };
 
-updateUser = (req, res) => {
-  const userIdToUpdate = req.params.id;
-  const userToUpdate = req.body;
-  const user = usersDB.find(user => user.id == userIdToUpdate);
-
-  user.name = userToUpdate.name || user.name;
-  user.age = userToUpdate.age || user.age;
-
-  res.json(user);
+async function updateUser (req, res){
+  const userName = req.params.name;
+  await users.findOneAndUpdate({name: userName}, req.body, {new: true});
+  const usus = await users.find();
+  res.json(usus);
 };
 
 module.exports = {

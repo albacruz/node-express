@@ -1,13 +1,15 @@
-class Movie {
-  constructor(id, title, director, genre, releaseDate, rating, likes) {
-    this.id = id;
-    this.title = title;
-    this.director = director;
-    this.genre = genre;
-    this.releaseDate = releaseDate;
-    this.rating = rating;
-    this.likes = likes;
-  }
-}
+const mongoose = require('mongoose');
 
-module.exports = Movie;
+const Schema = mongoose.Schema;
+
+const MovieSchema = new Schema({
+    title: String,
+    director: String,
+    genre: String,
+    releaseDate: Date,
+    rating: Number,
+    likes: Number
+
+});
+
+module.exports = mongoose.model('movies',MovieSchema);

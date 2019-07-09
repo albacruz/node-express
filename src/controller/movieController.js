@@ -1,62 +1,47 @@
-const movieModel = require("../models/Movie");
-const moviesDB = require("../database/movies");
+const movies = require("../models/Movie");
 
-showAll = (req, res) => {
-  res.json(moviesDB);
+async function showAll(req, res) {
+  const films = await movies.find();
+  res.json(films); 
 };
 
-showMovie = (req, res) => {
-  const movieId = req.params.id;
-  const movie = moviesDB.find(movie => movie.id == movieId);
+async function showMovie (req, res){
+  const movieTitle = req.params.title;
+  const movie = await movies.findOne({title: movieTitle});
   res.json(movie);
 };
 
-addMovie = (req, res) => {
-  const movie = new movieModel(
-    moviesDB.length,
-    req.body.title,
-    req.body.director,
-    req.body.genre,
-    req.body.releaseDate,
-    req.body.rating,
-    req.body.likes
-  );
-  moviesDB.push(movie);
-  res.send("Se ha añadido correctamente");
+async function addMovie(req, res) {
+  const movieToCreate = new movies(req.body);
+  await movieToCreate.save();
+  const films = await movies.find();
+  res.json(films);
 };
 
-deleteMovie = (req, res) => {
-  const movieId = req.params.id;
-  const movie = moviesDB.find(movie => movie.id == movieId);
-  const movieToRemove = moviesDB.indexOf(movie);
-  moviesDB.splice(movieToRemove, 1);
-  res.send("Se ha eliminado correctamente");
+async function deleteMovie (req, res){
+  const movieTitle = req.params.title;
+  await movies.findOneAndDelete({title: movieTitle});
+  const films = await movies.find();
+  res.json(films);
 };
 
-updateMovie = (req, res) => {
-  const movieIdToUpdate = req.params.id;
-  const updatedMovie = req.body;
-  c;
-  const movie = moviesDB.find(movie => movie.id == movieIdToUpdate);
-
-  movie.title = updatedMovie.title || movie.title;
-  movie.director = updatedMovie.director || movie.director;
-  movie.genre = updatedMovie.genre || movie.genre;
-  movie.releaseDate = updatedMovie.releaseDate || movie.releaseDate;
-  movie.rating = updatedMovie.rating || movie.rating;
-
-  res.json(movie);
+async function updateMovie (req, res){
+  const movieTitle = req.params.title;
+  await movies.findOneAndUpdate({title: movieTitle}, req.body, {new: true});
+  const films = await movies.find();
+  res.json(films);
 };
 
-like = (req, res) => {
-  const movieId = req.params.id;
-  const movie = moviesDB.find(movie => movie.id == movieId);
-  movie.likes++;
-
-  res.json(movie);
+async function like (req, res){
+  const movieTitle = req.params.title;
+  let like = movies.findOne({title: movieTitle}).likes;
+  console.log("likes = ", like);
+  await movies.findOneAndUpdate({title: movieTitle}, like++, {new: true});
+  const films = await movies.find();
+  res.json(films);
 };
 
-dislike = (req, res) => {
+async function dislike(req, res){
   const movieId = req.params.id;
   const movie = moviesDB.find(movie => movie.id == movieId);
   if (movie.likes > 0) movie.likes--;

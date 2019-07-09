@@ -1,9 +1,10 @@
-class User {
-  constructor(id, name, age) {
-    this.id = id;
-    this.name = name;
-    this.age = age;
-  }
-}
+const mongoose = require('mongoose');
 
-module.exports = User;
+const Schema = mongoose.Schema;
+
+const UserSchema = new Schema({
+    name: String,
+    age: Number
+});
+
+module.exports = mongoose.model('users',UserSchema);
