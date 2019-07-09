@@ -1,36 +1,36 @@
 const users = require("../models/User");
 
 async function showAll(req, res) {
-  const usu = await users.find();
-  res.json(usu); 
-};
+  const usus = await users.find();
+  res.json(usus);
+}
 
-async function showUser (req, res){
+async function showUser(req, res) {
   const userName = req.params.name;
-  const user = await users.findOne({name: userName});
+  const user = await users.findOne({ name: userName });
   res.json(user);
-};
+}
 
 async function addUser(req, res) {
   const userToCreate = new users(req.body);
   await userToCreate.save();
   const usus = await users.find();
   res.json(usus);
-};
+}
 
-async function deleteUser (req, res){
+async function deleteUser(req, res) {
   const userName = req.params.name;
-  await users.findOneAndDelete({name: userName});
+  await users.findOneAndDelete({ name: userName });
   const usus = await users.find();
   res.json(usus);
-};
+}
 
-async function updateUser (req, res){
+async function updateUser(req, res) {
   const userName = req.params.name;
-  await users.findOneAndUpdate({name: userName}, req.body, {new: true});
-  const usus = await users.find();
-  res.json(usus);
-};
+  await users.findOneAndUpdate({ name: userName }, req.body, { new: true });
+  const user = await users.findOne({ name: userName });
+  res.json(user);
+}
 
 module.exports = {
   addUser,
