@@ -13,9 +13,14 @@ async function showMovie(req, res) {
 
 async function addMovie(req, res) {
   const movieToCreate = new movies(req.body);
-  await movieToCreate.save();
-  const films = await movies.find();
-  res.json(films);
+  const real = await movies.find({ title: movieToCreate.title });
+  if (real == null) {
+    await movieToCreate.save();
+    const films = await movies.find();
+    res.json(films);
+  } else {
+    res.send("Ya existe");
+  }
 }
 
 async function deleteMovie(req, res) {

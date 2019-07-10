@@ -13,9 +13,14 @@ async function showUser(req, res) {
 
 async function addUser(req, res) {
   const userToCreate = new users(req.body);
-  await userToCreate.save();
-  const usus = await users.find();
-  res.json(usus);
+  const real = await users.find({ name: userToCreate.name });
+  if (real == null) {
+    await userToCreate.save();
+    const usus = await users.find();
+    res.json(usus);
+  } else {
+    res.send("Ya existe");
+  }
 }
 
 async function deleteUser(req, res) {
